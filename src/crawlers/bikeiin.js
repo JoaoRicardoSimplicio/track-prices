@@ -1,8 +1,7 @@
-const fs = require('fs');
 const CrawlerBase = require('./base/crawler');
 
 
-class CrawlerBikeiin extends CrawlerBase {
+class CrawlerBikeinn extends CrawlerBase {
   
   constructor(url, nameCrawler){
     super(url, nameCrawler)
@@ -12,8 +11,12 @@ class CrawlerBikeiin extends CrawlerBase {
     this.getPageParser()
     .then((pageParser) => {
       this.info = {
-        'title': pageParser('title')[0].children[0].data,
+        'title': pageParser('title').text(),
         'price': this.extractProductPrice(pageParser),
+        'sizes': this.extractProductSizes(pageParser),
+        'url': this.url,
+        'crawler': this.nameCrawler,
+        'date': new Date(),
       }
     })
     .catch((error) => {
@@ -24,16 +27,27 @@ class CrawlerBikeiin extends CrawlerBase {
   extractProductPrice(pageParser){
     return pageParser('#datos_producto_precio')[0].children[1].children[0].data
   }
+
+  extractProductSizes(pageParser){
+    let sizes = []
+    let itens = pageParser('#tallas_detalle')[0].children
+    for (let i in itens){
+      if (itens[i].name == 'option'){
+        sizes.push(itens[i].children[0].data)
+      }
+    }
+    return sizes
+  }
 }
 
 
 if (process.argv[2]){
   const url = process.argv[2]
-  const crawlerBikeiin = new CrawlerBikeiin(url, 'Bikeiin');
-  crawlerBikeiin.getPageInformation()
+  const crawlerBikeinn = new CrawlerBikeinn(url, 'Bikeinn');
+  crawlerBikeinn.getPageInformation()
   setTimeout(() => {
-    console.log(crawlerBikeiin.info)
+    console.log(crawlerBikeinn.info)
   }, 5000)
 }
 
-module.exports = CrawlerBikeiin
+module.exports = CrawlerBikeinn
