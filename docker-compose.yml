@@ -1,0 +1,15 @@
+version: '3'
+
+
+services:
+  database:
+      image: "postgres:13.1"
+      env_file:
+        - database.env
+      volumes:
+        - track-prices-database:/var/lib/postgresql/data/
+      ports:
+        - 5432:5432
+
+volumes:
+  track-prices-database:
