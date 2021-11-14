@@ -18,6 +18,9 @@ Price.init({
   },
   value: { type: Sequelize.STRING, allowNull: false },
   crawledDate: { type: Sequelize.DATE, allowNull: false },
+}, {
+  sequelize,
+  modelName: 'Prices'
 })
 
 module.exports = Price

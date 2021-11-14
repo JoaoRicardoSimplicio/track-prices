@@ -1,4 +1,5 @@
 const CrawlerBase = require('./base/crawler');
+const registerProduct = require('../services/register')
 
 
 class CrawlerKabum extends CrawlerBase {
@@ -30,9 +31,15 @@ class CrawlerKabum extends CrawlerBase {
 
 if (process.argv[2]){
   const url = process.argv[2]
+  const action = process.argv[3]
   const crawlerKabum = new CrawlerKabum(url, 'Kabum');
   crawlerKabum.getPageInformation()
   setTimeout(() => {
-    console.log(crawlerKabum.info)
+    if (action == '--save'){
+      registerProduct({ crawledProduct: crawlerKabum.info })
+    }
+    else {
+      console.log(crawlerKabum.info)
+    }
   }, 5000)
 }

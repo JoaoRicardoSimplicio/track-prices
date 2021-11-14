@@ -1,4 +1,5 @@
 const CrawlerBase = require('./base/crawler');
+const registerProduct = require('../services/register')
 
 
 class CrawlerBikeinn extends CrawlerBase {
@@ -11,7 +12,7 @@ class CrawlerBikeinn extends CrawlerBase {
     this.getPageParser()
     .then((pageParser) => {
       this.info = {
-        'title': pageParser('title').text(),
+        'title': this.extractProductTitle(pageParser),
         'price': this.extractProductPrice(pageParser),
         'sizes': this.extractProductSizes(pageParser),
         'url': this.url,
@@ -22,6 +23,10 @@ class CrawlerBikeinn extends CrawlerBase {
     .catch((error) => {
       console.log(error)
     })
+  }
+
+  extractProductTitle(pageParser){
+    return pageParser('.productName')[0].children[0].data
   }
 
   extractProductPrice(pageParser){
@@ -43,10 +48,16 @@ class CrawlerBikeinn extends CrawlerBase {
 
 if (process.argv[2]){
   const url = process.argv[2]
+  const action = process.argv[3]
   const crawlerBikeinn = new CrawlerBikeinn(url, 'Bikeinn');
   crawlerBikeinn.getPageInformation()
   setTimeout(() => {
-    console.log(crawlerBikeinn.info)
+    if (action == '--save'){
+      registerProduct({ crawledProduct: crawlerBikeinn.info })
+    }
+    else {
+      console.log(crawlerBikeinn.info)
+    }
   }, 5000)
 }
 
