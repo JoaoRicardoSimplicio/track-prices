@@ -6,18 +6,11 @@
     npm install
 ```
 
-### Crawler product info
 
-##### Bikeinn store
-
-```bash
-    node src/crawlers/bikeinn.js https://url_product 
-```
-
-##### Kabum store
+### Crawler product
 
 ```bash
-    node src/crawlers/kabum.js https://url_product --save # To save product on database
+    npm run crawler https://url_product nameCrawler action
 ```
 
 ##### Update prices of all your registred products

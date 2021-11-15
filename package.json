@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "update-prices": "node src/services/update.js"
+    "update-prices": "node src/services/executeUpdate.js",
+    "crawler": "node src/crawlers/main.js"
   },
   "author": "João Ricardo S. Soares",
   "license": "ISC",

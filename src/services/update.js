@@ -42,8 +42,4 @@ async function updateAllProductsPrice(){
   }
 }
 
-
-updateAllProductsPrice()
-
-
-module.exports = updateCrawledProduct
+module.exports = { updateCrawledProduct, updateAllProductsPrice }
