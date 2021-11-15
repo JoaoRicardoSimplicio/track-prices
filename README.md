@@ -1,5 +1,11 @@
 # Track prices
 
+### Setup
+
+```bash
+    npm install
+```
+
 ### Crawler product info
 
 ##### Bikeinn store
@@ -12,6 +18,12 @@
 
 ```bash
     node src/crawlers/kabum.js https://url_product --save # To save product on database
+```
+
+##### Update prices of all your registred products
+
+```bash
+    npm run update-prices
 ```
 
 

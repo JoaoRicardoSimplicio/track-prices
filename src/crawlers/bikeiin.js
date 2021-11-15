@@ -1,5 +1,7 @@
 const CrawlerBase = require('./base/crawler');
+
 const registerProduct = require('../services/register')
+const updateCrawledProduct = require('../services/update')
 
 
 class CrawlerBikeinn extends CrawlerBase {
@@ -54,6 +56,9 @@ if (process.argv[2]){
   setTimeout(() => {
     if (action == '--save'){
       registerProduct({ crawledProduct: crawlerBikeinn.info })
+    }
+    else if (action == '--update'){
+      updateCrawledProduct({ crawledProduct: crawlerBikeinn.info })
     }
     else {
       console.log(crawlerBikeinn.info)

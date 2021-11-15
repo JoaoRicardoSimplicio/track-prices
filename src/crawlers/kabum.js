@@ -1,5 +1,7 @@
 const CrawlerBase = require('./base/crawler');
+
 const registerProduct = require('../services/register')
+const updateCrawledProduct = require('../services/update')
 
 
 class CrawlerKabum extends CrawlerBase {
@@ -38,8 +40,13 @@ if (process.argv[2]){
     if (action == '--save'){
       registerProduct({ crawledProduct: crawlerKabum.info })
     }
+    else if (action == '--update'){
+      updateCrawledProduct({ crawledProduct: crawlerKabum.info })
+    }
     else {
       console.log(crawlerKabum.info)
     }
   }, 5000)
 }
+
+module.exports = CrawlerKabum

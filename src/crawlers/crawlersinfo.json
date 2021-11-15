@@ -1,0 +1,8 @@
+{
+    "Bikeinn": {
+        "path": "crawlers/bikeinn"
+    },
+    "Kabum": {
+        "path": "crawlers/kabum"
+    }
+}
