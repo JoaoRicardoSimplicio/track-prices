@@ -2,20 +2,22 @@ const cheerio = require('cheerio');
 const fetch = require('cross-fetch');
 
 
-var REQUESTERCONFIG = {
-  method: 'GET',
-  headers: {
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
-  },
-}
-
-
 class CrawlerBase {
 
   constructor(url, nameCrawler){
     this.url = url
     this.nameCrawler = nameCrawler
+    this.headers = this.getHeaders()
     this.info = {}
+  }
+
+  getHeaders(){
+    return {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+      },
+    }
   }
 
   async getPageParser(){
@@ -25,7 +27,7 @@ class CrawlerBase {
   }
 
   async getPage(){
-    const resp = await fetch(this.url, REQUESTERCONFIG) 
+    const resp = await fetch(this.url, this.headers) 
     const pageHtml = await resp.text()
     return pageHtml
   }

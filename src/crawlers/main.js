@@ -15,7 +15,7 @@ if (process.argv[3]){
         registerCrawledProduct({ crawledProduct: crawlerStore.info })
       }
       else {
-        console.log(storeCrawler.info)
+        console.log(crawlerStore.info)
       }
     }, 5000)
   }
