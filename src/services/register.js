@@ -16,7 +16,7 @@ async function registerCrawledProduct(crawler) {
     })
   })
   .catch((errorCrawledProduct) => {
-    console.log(errorCrawledProduct.errors[0].message)
+    console.log(errorCrawledProduct.errors)
   })
 }
 
