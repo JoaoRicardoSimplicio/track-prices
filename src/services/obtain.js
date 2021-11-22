@@ -15,7 +15,7 @@ async function obtainAllProductsData(){
       }
     })
     prices.map(function(price){
-      product['prices'].push(price.value)
+      product['prices'].push({ 'value': price.value, 'date':  price.crawledDate })
     })
     console.log(product)
   }
